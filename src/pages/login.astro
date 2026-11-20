@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Iniciar sesión">
+  <section class="tarjeta mx-auto max-w-sm p-8">
+    <h1 class="text-2xl font-bold">Iniciar sesión</h1>
+    <p class="mb-6 text-sm text-slate-400">Bienvenido de nuevo a Vidora.</p>
+
+    <!-- Prototipo: al enviar se simula el inicio de sesión y se va al feed -->
+    <form action="/feed" method="get" class="space-y-4">
+      <p>
+        <label for="email" class="etiqueta">Correo electrónico</label>
+        <input type="email" id="email" name="email" required class="campo" />
+      </p>
+      <p>
+        <label for="password" class="etiqueta">Contraseña</label>
+        <input type="password" id="password" name="password" required class="campo" />
+      </p>
+      <button type="submit" class="btn w-full">Entrar</button>
+    </form>
+
+    <p class="mt-6 text-center text-sm">¿No tienes cuenta? <a href="/registro" class="font-semibold text-violet-400 hover:underline">Regístrate</a></p>
+  </section>
+</Layout>

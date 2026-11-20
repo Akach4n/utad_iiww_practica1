@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VideoCard from '../components/VideoCard.astro';
+import { usuarioActual, videos, avatar, getSuscripciones, getSuscriptores } from '../data/datos';
+
+const suscripciones = getSuscripciones(usuarioActual._id);
+---
+
+<Layout title="Feed">
+  <div class="grid gap-6 md:grid-cols-[250px_1fr]">
+    <aside class="space-y-6">
+      <section class="tarjeta overflow-hidden">
+        <div class="h-16 bg-linear-to-r from-violet-500 to-fuchsia-400"></div>
+        <div class="-mt-10 px-5 pb-5">
+          <img src={avatar(usuarioActual, 80)} alt={`Avatar de ${usuarioActual.fullName}`} width="80" height="80" class="rounded-full ring-4 ring-slate-900" />
+          <h2 class="mt-2 text-lg font-bold">{usuarioActual.fullName}</h2>
+          <p class="text-sm text-slate-400">@{usuarioActual.userName}</p>
+          <p class="mt-2 inline-block rounded-md bg-violet-500/15 px-3 py-1 text-xs font-semibold text-violet-300">{getSuscriptores(usuarioActual._id)} suscriptores</p>
+        </div>
+      </section>
+
+      <section class="tarjeta p-5">
+        <h2 class="mb-3 font-bold">Suscripciones</h2>
+        <ul class="space-y-1">
+          {
+            suscripciones.map((u) => (
+              <li class="flex items-center gap-3 rounded-md p-1.5 text-sm hover:bg-slate-800">
+                <img src={avatar(u, 32)} alt="" width="32" height="32" class="rounded-full" />
+                {u.fullName}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </aside>
+
+    <section>
+      <h1 class="mb-5 text-2xl font-bold">Vídeos recomendados</h1>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {videos.map((video) => <VideoCard video={video} />)}
+      </div>
+    </section>
+  </div>
+</Layout>

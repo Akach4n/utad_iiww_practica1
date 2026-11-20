@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Subir vídeo">
+  <section class="tarjeta mx-auto max-w-lg p-8">
+    <h1 class="text-2xl font-bold">Subir un vídeo</h1>
+    <p class="mb-6 text-sm text-slate-400">Comparte tu vídeo con la comunidad.</p>
+
+    <!-- Prototipo: al enviar se vuelve al feed -->
+    <form action="/feed" method="get" class="space-y-4">
+      <p>
+        <label for="title" class="etiqueta">Título</label>
+        <input type="text" id="title" name="title" required class="campo" />
+      </p>
+      <p>
+        <label for="description" class="etiqueta">Descripción</label>
+        <textarea id="description" name="description" rows="4" class="campo"></textarea>
+      </p>
+      <p>
+        <label for="url" class="etiqueta">Archivo de vídeo</label>
+        <input type="file" id="url" name="url" accept="video/*" required class="w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-violet-500/15 file:px-4 file:py-2 file:font-semibold file:text-violet-300" />
+      </p>
+      <p>
+        <label for="thumbnail" class="etiqueta">Miniatura</label>
+        <input type="file" id="thumbnail" name="thumbnail" accept="image/*" class="w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-violet-500/15 file:px-4 file:py-2 file:font-semibold file:text-violet-300" />
+      </p>
+      <p class="flex items-center gap-2">
+        <input type="checkbox" id="kidsFriendly" name="kidsFriendly" class="size-4 accent-violet-600" />
+        <label for="kidsFriendly" class="text-sm">Apto para niños</label>
+      </p>
+      <button type="submit" class="btn w-full">Publicar</button>
+    </form>
+  </section>
+</Layout>

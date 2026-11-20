@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const ventajas = [
+  { icono: '↑', titulo: 'Subir vídeos', texto: 'Comparte tus vídeos con un título y una miniatura.' },
+  { icono: '★', titulo: 'Suscribirte', texto: 'Sigue a otros usuarios para ver sus vídeos en tu feed.' },
+  { icono: '✎', titulo: 'Comentar', texto: 'Da "me gusta" y comenta los vídeos que más te gusten.' },
+];
+---
+
+<Layout title="Inicio">
+  <section class="rounded-xl bg-linear-to-br from-violet-600 to-fuchsia-500 px-6 py-16 text-center text-white shadow-lg">
+    <h1 class="text-4xl font-extrabold sm:text-5xl">Bienvenido a Vidora</h1>
+    <p class="mx-auto mt-4 max-w-xl text-lg text-violet-100">La red social donde puedes subir tus vídeos, ver los de otros usuarios y comentar con la comunidad.</p>
+    <p class="mt-8 flex flex-wrap justify-center gap-4">
+      <a href="/feed" class="inline-block rounded-md bg-white px-6 py-3 font-semibold text-violet-700 shadow transition hover:bg-violet-50">Ir al feed</a>
+      <a href="/registro" class="inline-block rounded-md border border-white/60 px-6 py-3 font-semibold transition hover:bg-white/10">Crear cuenta</a>
+    </p>
+  </section>
+
+  <section class="mt-12">
+    <h2 class="mb-6 text-center text-2xl font-bold">¿Qué puedes hacer?</h2>
+    <ul class="grid gap-5 md:grid-cols-3">
+      {
+        ventajas.map((v) => (
+          <li class="tarjeta p-6 transition hover:ring-violet-500/50">
+            <span class="grid size-11 place-items-center rounded-md bg-violet-500/15 text-lg text-violet-300">{v.icono}</span>
+            <h3 class="mt-4 font-semibold">{v.titulo}</h3>
+            <p class="mt-1 text-sm text-slate-400">{v.texto}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

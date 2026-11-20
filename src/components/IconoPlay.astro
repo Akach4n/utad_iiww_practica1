@@ -1,0 +1,10 @@
+---
+// Icono de play del logo de Vidora. Se usa en la barra y en las tarjetas de vídeo
+const { class: clase = 'size-8' } = Astro.props;
+---
+
+<span class:list={['grid place-items-center rounded-md bg-violet-600 text-white', clase]}>
+  <svg viewBox="0 0 24 24" class="size-1/2 translate-x-px fill-current" aria-hidden="true">
+    <path d="M7 4.5v15l12.5-7.5z"></path>
+  </svg>
+</span>

@@ -1,0 +1,22 @@
+---
+import IconoPlay from './IconoPlay.astro';
+import { getUsuario, getVisualizaciones } from '../data/datos';
+
+const { video } = Astro.props;
+---
+
+<article class="tarjeta group overflow-hidden transition hover:-translate-y-1 hover:ring-violet-500/50">
+  <a href={`/video/${video._id}`}>
+    <div class="relative">
+      <img src={video.thumbnail} alt={`Miniatura de ${video.title}`} width="320" height="180" class="aspect-video w-full object-cover" />
+      <div class="absolute inset-0 grid place-items-center bg-black/40 opacity-0 transition group-hover:opacity-100">
+        <IconoPlay class="size-12 shadow-lg" />
+      </div>
+    </div>
+    <div class="p-4">
+      <h3 class="font-semibold group-hover:text-violet-300">{video.title}</h3>
+      <p class="mt-1 text-sm text-slate-400">{getUsuario(video.user).fullName}</p>
+      <p class="text-sm text-slate-400">{getVisualizaciones(video._id)} visualizaciones</p>
+    </div>
+  </a>
+</article>

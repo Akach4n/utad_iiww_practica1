@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { videos, getUsuario, getVisualizaciones, getLikes, getComentarios, avatar } from '../../data/datos';
+
+export function getStaticPaths() {
+  return videos.map((video) => ({ params: { id: video._id }, props: { video } }));
+}
+
+const { video } = Astro.props;
+const autor = getUsuario(video.user);
+const comentarios = getComentarios(video._id);
+---
+
+<Layout title={video.title}>
+  <article class="mx-auto max-w-3xl">
+    <video controls poster={video.thumbnail} class="aspect-video w-full rounded-lg bg-black shadow-lg">
+      <source src={video.url} type="video/mp4" />
+      Tu navegador no puede reproducir el vídeo.
+    </video>
+
+    <h1 class="mt-5 text-2xl font-bold">{video.title}</h1>
+    <div class="mt-2 flex flex-wrap items-center justify-between gap-3">
+      <p class="text-slate-400">Subido por <strong class="text-white">{autor.fullName}</strong> · {getVisualizaciones(video._id)} visualizaciones</p>
+      <button type="button" class="rounded-md border border-violet-500/40 bg-violet-500/10 px-4 py-2 font-semibold text-violet-300 transition hover:bg-violet-500/20">
+        ♥ {getLikes(video._id)} Me gusta
+      </button>
+    </div>
+
+    <p class="tarjeta mt-4 p-4">{video.description}</p>
+
+    <section class="mt-10">
+      <h2 class="mb-4 text-xl font-bold">{comentarios.length} comentarios</h2>
+
+      <form action="#" method="get" class="tarjeta mb-6 p-4">
+        <label for="comentario" class="etiqueta">Añade un comentario</label>
+        <textarea id="comentario" name="text" rows="2" required class="campo"></textarea>
+        <button type="submit" class="btn mt-3">Comentar</button>
+      </form>
+
+      {
+        comentarios.length === 0 ? (
+          <p class="text-slate-400">Todavía no hay comentarios.</p>
+        ) : (
+          <ul class="space-y-3">
+            {comentarios.map((c) => (
+              <li class="tarjeta flex gap-3 p-4">
+                <img src={avatar(getUsuario(c.user), 36)} alt="" width="36" height="36" class="size-9 shrink-0 rounded-full" />
+                <div>
+                  <p class="text-sm font-semibold">{getUsuario(c.user).fullName}</p>
+                  <p>{c.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+  </article>
+</Layout>
